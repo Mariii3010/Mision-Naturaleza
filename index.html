@@ -4,507 +4,121 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Misión Naturaleza</title>
+
   <style>
-    :root {
-      --verde-claro: #c5e8b7;
-      --verde-medio: #9fd28f;
-      --verde-oscuro: #234b3a;
-      --azul-claro: #cfeffc;
-      --beige: #e8d9b4;
-      --rosa-claro: #f6dce2;
-      --texto: #2f3d34;
-      --blanco: #ffffff;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-    }
-
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--texto);
+      font-family: Arial, sans-serif;
       background: #f7f7f7;
-      line-height: 1.6;
+      margin: 0;
     }
 
     header {
-      background: var(--verde-claro);
-      padding: 18px 40px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: #c5e8b7;
+      padding: 20px;
+      text-align: center;
     }
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .logo-area img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      border-radius: 50%;
-    }
-
-    .logo-area h1 {
-      font-size: 2.7rem;
-      color: #3f4a45;
-      letter-spacing: 1px;
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #3f4a45;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-
-    nav a:hover {
-      color: var(--verde-oscuro);
-      text-decoration: underline;
+    h1 {
+      margin: 0;
     }
 
     section {
-      width: 100%;
-    }
-
-    .hero {
-      min-height: 100vh;
-      background: linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.28)),
-        url("imagenes/selva.jpg") center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 80px;
-      color: var(--blanco);
-    }
-
-    .hero-content {
-      max-width: 800px;
-    }
-
-    .hero h2 {
-      font-size: 5rem;
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 1.4rem;
-      max-width: 700px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      display: inline-block;
-      background: var(--verde-claro);
-      color: #1f2b25;
-      text-decoration: none;
-      padding: 16px 34px;
-      font-weight: bold;
-      border: 2px solid #4c5b4f;
-      transition: 0.3s ease;
-    }
-
-    .btn:hover {
-      background: var(--verde-medio);
-      transform: translateY(-2px);
-    }
-
-    .bienvenida {
-      min-height: 90vh;
-      background: linear-gradient(rgba(15, 30, 60, 0.35), rgba(15, 30, 60, 0.35)),
-        url("imagenes/playa.jpg") center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 60px 20px;
-      color: white;
-    }
-
-    .bienvenida .contenido {
-      max-width: 1100px;
-    }
-
-    .bienvenida p {
-      font-size: 2rem;
-      font-weight: bold;
-      line-height: 1.5;
-      margin-bottom: 30px;
-    }
-
-    .frase {
-      min-height: 75vh;
-      background: linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.20)),
-        url("imagenes/laguna.jpg") center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
       padding: 40px 20px;
-    }
-
-    .frase h2 {
-      font-size: 4rem;
-      max-width: 1000px;
-      line-height: 1.2;
-    }
-
-    .quienes {
-      background: var(--rosa-claro);
-      padding: 90px 20px 60px;
       text-align: center;
     }
 
-    .quienes .contenedor {
-      max-width: 1100px;
+    /* ===== CARRUSEL ===== */
+    .carrusel {
+      position: relative;
+      max-width: 900px;
       margin: auto;
-    }
-
-    .quienes h2 {
-      font-size: 3rem;
-      margin-bottom: 30px;
-    }
-
-    .quienes .intro {
-      font-size: 1.5rem;
-      font-weight: bold;
-      max-width: 950px;
-      margin: 0 auto 50px;
-      line-height: 1.6;
-    }
-
-    .mision-vision {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-      margin-top: 40px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.45);
-      padding: 35px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-
-    .card h3 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #354842;
-    }
-
-    .card p {
-      font-size: 1.2rem;
-    }
-
-    .ods {
-      background: var(--beige);
-      padding: 90px 20px;
-    }
-
-    .ods .contenedor {
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .ods h2 {
-      text-align: center;
-      font-size: 3rem;
-      margin-bottom: 50px;
-    }
-
-    .ods-grid {
-      display: grid;
-      gap: 40px;
-    }
-
-    .ods-item {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      background: rgba(255,255,255,0.35);
       overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-radius: 15px;
     }
 
-    .ods-item img {
+    .carrusel-contenedor {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carrusel img {
       width: 100%;
-      height: 100%;
+      height: 400px;
       object-fit: cover;
-      min-height: 320px;
+      flex-shrink: 0;
     }
 
-    .ods-texto {
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 15px;
+      cursor: pointer;
+      font-size: 25px;
     }
 
-    .ods-texto h3 {
-      font-size: 2.4rem;
-      margin-bottom: 20px;
-      color: #3f4a45;
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.8);
     }
 
-    .ods-texto p {
-      font-size: 1.2rem;
-      margin-bottom: 25px;
-    }
-
-    .contacto {
-      background: var(--verde-claro);
-      padding: 70px 20px;
-    }
-
-    .contacto .contenedor {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-
-    .marca-footer {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .marca-footer img {
-      width: 180px;
-      object-fit: contain;
-    }
-
-    .marca-footer h3 {
-      font-size: 3rem;
-      line-height: 1.1;
-    }
-
-    .datos h4 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    .datos p {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
-
-    footer {
-      background: var(--verde-claro);
-      text-align: left;
-      padding: 20px 20px 50px;
-      max-width: 1200px;
-      margin: auto;
-      font-size: 1.2rem;
-    }
-
-    @media (max-width: 900px) {
-      .logo-area h1 {
-        font-size: 2rem;
-      }
-
-      .hero {
-        padding: 40px 20px;
-      }
-
-      .hero h2 {
-        font-size: 3rem;
-      }
-
-      .bienvenida p {
-        font-size: 1.4rem;
-      }
-
-      .frase h2 {
-        font-size: 2.5rem;
-      }
-
-      .ods-item,
-      .contacto .contenedor {
-        grid-template-columns: 1fr;
-      }
-
-      .marca-footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .marca-footer h3 {
-        font-size: 2.2rem;
+    @media (max-width: 600px) {
+      .carrusel img {
+        height: 250px;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <div class="nav-container">
-      <div class="logo-area">
-        <img src="imagenes/logo-mision-naturaleza.png" alt="Logo Misión Naturaleza">
-        <h1>MISIÓN NATURALEZA</h1>
-      </div>
+<header>
+  <h1>MISIÓN NATURALEZA</h1>
+</header>
 
-      <nav>
-        <ul>
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#quienes-somos">¿Quiénes somos?</a></li>
-          <li><a href="#ods">Explorar ODS</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<section>
+  <h2>Galería (Carrusel)</h2>
 
-  <section id="inicio" class="hero">
-    <div class="hero-content">
-      <h2>Ecosistemas sanos,<br>futuro seguro</h2>
-      <p>
-        Misión Naturaleza es un espacio dedicado a promover acciones de voluntariado,
-        conciencia ambiental y participación comunitaria para proteger los ecosistemas
-        terrestres y marinos.
-      </p>
-      <a href="#quienes-somos" class="btn">Conocer más</a>
-    </div>
-  </section>
+  <div class="carrusel">
+    <button class="prev">&#10094;</button>
 
-  <section class="bienvenida">
-    <div class="contenido">
-      <p>
-        Bienvenido a este espacio dedicado a promover acciones de voluntariado para
-        proteger los ecosistemas terrestres y marinos. Aquí encontrarás información
-        clara, proyectos accesibles y oportunidades para aprender cómo tus acciones
-        pueden generar un impacto positivo en la naturaleza.
-      </p>
-      <p>¡Da el primer paso hacia un mundo sostenible!</p>
-      <a href="#contacto" class="btn">Registrarse</a>
-    </div>
-  </section>
-
-  <section class="frase">
-    <h2>Un mundo en equilibrio solo se logra cuando la tierra y el mar se cuidan por igual</h2>
-  </section>
-
-  <section id="quienes-somos" class="quienes">
-    <div class="contenedor">
-      <h2>¿QUIÉNES SOMOS?</h2>
-      <p class="intro">
-        Somos una comunidad comprometida con la conservación de los ecosistemas
-        terrestres y marinos. Conectamos a personas interesadas en ayudar con
-        proyectos que generan un impacto positivo en la naturaleza. Creemos que
-        cada acción cuenta y que la colaboración puede transformar nuestro entorno.
-      </p>
-
-      <div class="mision-vision">
-        <div class="card">
-          <h3>Nuestra misión</h3>
-          <p>
-            Acercar a más personas a la conservación de los ecosistemas terrestres y
-            marinos. Queremos generar conciencia sobre la urgencia de cuidar nuestro
-            entorno y, al mismo tiempo, inspirar acciones que tengan un impacto positivo.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Nuestra visión</h3>
-          <p>
-            Ser una comunidad digital comprometida y vibrante, donde la naturaleza tenga
-            un papel central y en la que la unión de distintas perspectivas ayude a
-            garantizar un entorno sostenible para las próximas generaciones.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="ods" class="ods">
-    <div class="contenedor">
-      <h2>NUESTROS OBJETIVOS DE DESARROLLO SOSTENIBLE</h2>
-
-      <div class="ods-grid">
-        <article class="ods-item">
-          <img src="imagenes/ods15.jpg" alt="Ecosistemas terrestres">
-          <div class="ods-texto">
-            <h3>ODS 15: Vida de ecosistemas terrestres</h3>
-            <p>
-              Este objetivo es clave para conservar selvas, suelos y la vida silvestre
-              que sustentan el equilibrio ecológico. Con nuestras iniciativas impulsamos
-              acciones como reforestación, restauración de hábitats, cuidado de áreas
-              naturales y difusión de prácticas responsables para proteger los ecosistemas terrestres.
-            </p>
-            <a href="https://www.un.org/sustainabledevelopment/es/biodiversity/" target="_blank" class="btn">Más información</a>
-          </div>
-        </article>
-
-        <article class="ods-item">
-          <img src="imagenes/ods14.jpg" alt="Ecosistemas marinos">
-          <div class="ods-texto" style="background: var(--azul-claro);">
-            <h3>ODS 14: Vida submarina</h3>
-            <p>
-              Los ecosistemas marinos son esenciales para la vida, regulan el clima
-              y albergan una biodiversidad única que hoy enfrenta contaminación,
-              sobrepesca y degradación. A través de nuestros proyectos promovemos
-              actividades de voluntariado que apoyan la limpieza de playas y cenotes,
-              el monitoreo de especies y la educación sobre la protección de los ecosistemas marinos.
-            </p>
-            <a href="https://www.un.org/sustainabledevelopment/es/oceans/" target="_blank" class="btn">Más información</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="contacto" class="contacto">
-    <div class="contenedor">
-      <div class="marca-footer">
-        <img src="imagenes/logo-mision-naturaleza.png" alt="Logo Misión Naturaleza">
-        <h3>Misión<br>Naturaleza</h3>
-      </div>
-
-      <div class="datos">
-        <h4>Contacto</h4>
-        <p>Instagram: @_misionnaturaleza</p>
-        <p>Correo: misionnaturaleza@gmail.com</p>
-        <p>Tel: +52 938 388 6102</p>
-        <br>
-        <h4>Horario de atención</h4>
-        <p>Lunes a Viernes: 7:00 a 17:00</p>
-        <p>Sábados: 7:00 a 12:00</p>
-      </div>
+    <div class="carrusel-contenedor">
+      <img src="laguna.jpg">
+      <img src="logo-mision-naturaleza.png">
+      <img src="ods14.jpg">
+      <img src="ods15.jpg">
+      <img src="playa.jpg">
+      <img src="selva.jpg">
     </div>
 
-    <footer>
-      <p>© Misión Naturaleza 2025</p>
-      <p>Todos los derechos reservados</p>
-    </footer>
-  </section>
+    <button class="next">&#10095;</button>
+  </div>
+</section>
+
+<script>
+let index = 0;
+const contenedor = document.querySelector(".carrusel-contenedor");
+const total = document.querySelectorAll(".carrusel img").length;
+
+document.querySelector(".next").onclick = () => {
+  index = (index + 1) % total;
+  actualizar();
+};
+
+document.querySelector(".prev").onclick = () => {
+  index = (index - 1 + total) % total;
+  actualizar();
+};
+
+function actualizar() {
+  contenedor.style.transform = `translateX(-${index * 100}%)`;
+}
+</script>
 
 </body>
 </html>
