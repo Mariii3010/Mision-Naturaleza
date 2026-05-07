@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Misión Naturaleza</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <style>
     :root {
       --verde-claro: #c5e8b7;
@@ -180,14 +184,23 @@
       text-align: center;
     }
 
-    .quienes .contenedor {
-      max-width: 1100px;
+    .quienes .contenedor,
+    .ods .contenedor,
+    .impacto .contenedor,
+    .faq .contenedor {
+      max-width: 1200px;
       margin: auto;
     }
 
-    .quienes h2 {
+    .quienes h2,
+    .ods h2,
+    .galeria-carrusel h2,
+    .impacto h2,
+    .faq h2 {
       font-size: 3rem;
       margin-bottom: 30px;
+      text-align: center;
+      color: var(--verde-oscuro);
     }
 
     .quienes .intro {
@@ -206,10 +219,10 @@
     }
 
     .card {
-      background: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.65);
       padding: 35px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
 
     .card h3 {
@@ -227,17 +240,6 @@
       padding: 90px 20px;
     }
 
-    .ods .contenedor {
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .ods h2 {
-      text-align: center;
-      font-size: 3rem;
-      margin-bottom: 50px;
-    }
-
     .ods-grid {
       display: grid;
       gap: 40px;
@@ -246,10 +248,10 @@
     .ods-item {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
-      background: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.45);
       overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.10);
     }
 
     .ods-item img {
@@ -277,16 +279,60 @@
       margin-bottom: 25px;
     }
 
+    .impacto {
+      background: #f9fff6;
+      padding: 90px 20px;
+    }
+
+    .impacto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: stretch;
+    }
+
+    .impacto-card {
+      background: white;
+      border-radius: 22px;
+      padding: 35px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+    }
+
+    .impacto-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--verde-oscuro);
+    }
+
+    .contador {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    .contador-box {
+      background: var(--verde-claro);
+      padding: 25px 15px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .contador-numero {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--verde-oscuro);
+    }
+
+    .contador-box p {
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
     .galeria-carrusel {
       background: #f7f7f7;
       padding: 90px 20px;
       text-align: center;
-    }
-
-    .galeria-carrusel h2 {
-      font-size: 3rem;
-      margin-bottom: 35px;
-      color: var(--verde-oscuro);
     }
 
     .carrusel {
@@ -294,8 +340,8 @@
       max-width: 950px;
       margin: auto;
       overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.18);
     }
 
     .carrusel-contenedor {
@@ -322,19 +368,44 @@
       cursor: pointer;
       font-size: 28px;
       z-index: 10;
+      border-radius: 50%;
     }
 
-    .prev {
-      left: 10px;
-    }
-
-    .next {
-      right: 10px;
-    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
 
     .prev:hover,
     .next:hover {
       background: rgba(0,0,0,0.8);
+    }
+
+    .faq {
+      background: var(--azul-claro);
+      padding: 90px 20px;
+    }
+
+    .accordion-item {
+      background: white;
+      margin-bottom: 16px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 5px 14px rgba(0,0,0,0.08);
+    }
+
+    .accordion-header {
+      padding: 22px;
+      background: var(--verde-claro);
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: var(--verde-oscuro);
+    }
+
+    .accordion-content {
+      padding: 22px;
+      display: none;
+      font-size: 1.1rem;
+      background: #ffffff;
     }
 
     .contacto {
@@ -391,6 +462,10 @@
         font-size: 2rem;
       }
 
+      nav ul {
+        gap: 14px;
+      }
+
       .hero {
         padding: 40px 20px;
       }
@@ -408,7 +483,12 @@
       }
 
       .ods-item,
-      .contacto .contenedor {
+      .contacto .contenedor,
+      .impacto-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contador {
         grid-template-columns: 1fr;
       }
 
@@ -441,8 +521,10 @@
         <ul>
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#quienes-somos">¿Quiénes somos?</a></li>
-          <li><a href="#ods">Explorar ODS</a></li>
+          <li><a href="#ods">ODS</a></li>
+          <li><a href="#impacto">Impacto</a></li>
           <li><a href="#galeria">Galería</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
@@ -547,6 +629,46 @@
     </div>
   </section>
 
+  <section id="impacto" class="impacto">
+    <div class="contenedor">
+      <h2>Impacto de Misión Naturaleza</h2>
+
+      <div class="impacto-grid">
+        <div class="impacto-card">
+          <h3>Acciones ambientales por área</h3>
+          <p>
+            Esta gráfica muestra de forma visual las principales acciones que promueve el proyecto.
+          </p>
+          <canvas id="graficaImpacto"></canvas>
+        </div>
+
+        <div class="impacto-card">
+          <h3>Contador de impacto</h3>
+          <p>
+            Este contador representa de manera dinámica el crecimiento de las acciones positivas.
+          </p>
+
+          <div class="contador">
+            <div class="contador-box">
+              <div class="contador-numero" id="contador1">0</div>
+              <p>Árboles plantados</p>
+            </div>
+
+            <div class="contador-box">
+              <div class="contador-numero" id="contador2">0</div>
+              <p>Voluntarios</p>
+            </div>
+
+            <div class="contador-box">
+              <div class="contador-numero" id="contador3">0</div>
+              <p>Playas limpias</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="galeria" class="galeria-carrusel">
     <h2>Galería</h2>
 
@@ -563,6 +685,40 @@
       </div>
 
       <button class="next">&#10095;</button>
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <div class="contenedor">
+      <h2>Preguntas frecuentes</h2>
+
+      <div class="accordion-item">
+        <div class="accordion-header">¿Qué es Misión Naturaleza?</div>
+        <div class="accordion-content">
+          Es una comunidad que promueve la conservación de ecosistemas terrestres y marinos mediante educación ambiental, voluntariado y participación ciudadana.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">¿Qué ODS trabaja el proyecto?</div>
+        <div class="accordion-content">
+          El proyecto se relaciona principalmente con el ODS 14: Vida submarina y el ODS 15: Vida de ecosistemas terrestres.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">¿Cómo puedo participar?</div>
+        <div class="accordion-content">
+          Puedes participar en actividades como limpieza de playas, reforestación, restauración de hábitats, difusión ambiental y voluntariado comunitario.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">¿Por qué es importante cuidar los ecosistemas?</div>
+        <div class="accordion-content">
+          Porque los ecosistemas proporcionan aire limpio, agua, alimentos, biodiversidad y equilibrio climático. Cuidarlos es proteger nuestro futuro.
+        </div>
+      </div>
     </div>
   </section>
 
@@ -611,6 +767,63 @@
     function actualizarCarrusel() {
       contenedor.style.transform = `translateX(-${indice * 100}%)`;
     }
+
+    const ctx = document.getElementById("graficaImpacto").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Reforestación", "Limpieza de playas", "Educación ambiental", "Cuidado de hábitats"],
+        datasets: [{
+          label: "Acciones realizadas",
+          data: [35, 22, 40, 18],
+          backgroundColor: ["#4CAF50", "#2196F3", "#FFC107", "#9FD28F"],
+          borderRadius: 12
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 14
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    function animarContador(id, limite, velocidad) {
+      let numero = 0;
+      const elemento = document.getElementById(id);
+
+      const intervalo = setInterval(() => {
+        numero++;
+        elemento.textContent = numero;
+
+        if (numero >= limite) {
+          clearInterval(intervalo);
+        }
+      }, velocidad);
+    }
+
+    animarContador("contador1", 120, 20);
+    animarContador("contador2", 75, 30);
+    animarContador("contador3", 18, 80);
+
+    $(document).ready(function() {
+      $(".accordion-header").click(function() {
+        $(this).next(".accordion-content").slideToggle();
+        $(".accordion-content").not($(this).next()).slideUp();
+      });
+    });
   </script>
 
 </body>
